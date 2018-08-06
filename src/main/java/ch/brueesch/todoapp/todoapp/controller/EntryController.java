@@ -24,7 +24,7 @@ public class EntryController {
 		this.entryService = entryService;
 	}
 
-	@RequestMapping(value = "/addEntry", method = RequestMethod.POST)
+	@RequestMapping(value = "/addEntry", method = RequestMethod.GET)
 	public ResponseEntity<String> addEntry(Entry entry) {
 		if (entry.getDate() == null) {
 			entry.setDate(LocalDate.now());
