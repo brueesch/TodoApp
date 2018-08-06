@@ -1,7 +1,9 @@
 package ch.brueesch.todoapp.todoapp.services;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
@@ -19,5 +21,19 @@ public class EntryService {
 	public ArrayList<Entry> getAllEntries() {
 		entries.sort(Comparator.comparing(Entry::getPriority));
 		return entries;
+	}
+
+	public ArrayList<Entry> getAllEntriesForToday() {
+		return entries.stream()
+				.filter(Entry::isTodayOrBefore)
+				.collect(Collectors.toCollection(ArrayList::new));
+	}
+
+	public void setNewDate(int index, LocalDate date) {
+		entries.get(index).setDate(date);
+	}
+
+	public void removeEntry(int i) {
+		entries.remove(i);
 	}
 }
