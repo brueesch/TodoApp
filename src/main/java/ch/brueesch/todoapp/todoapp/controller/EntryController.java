@@ -24,12 +24,12 @@ public class EntryController {
 	}
 
 	@RequestMapping(value = "/addEntry", method = RequestMethod.POST)
-	public ResponseEntity<String> addEntry(@RequestBody Entry entry) {
+	public String addEntry(@RequestBody @ModelAttribute(value = "entry") Entry entry) {
 		if (entry.getDate() == null) {
 			entry.setDate(LocalDate.now());
 		}
 		entryService.addEntry(entry);
-		return ResponseEntity.ok("Everything is okay!");
+		return "redirect:/";
 	}
 
 	@RequestMapping(value = "/getAllEntries", method = RequestMethod.GET)
@@ -49,8 +49,8 @@ public class EntryController {
 	}
 
 	@RequestMapping(value = "/removeEntry", method = RequestMethod.POST)
-	public ResponseEntity<String> removeEntry(@RequestBody int index) {
+	public String removeEntry(@RequestBody @RequestParam("index") int index) {
 		entryService.removeEntry(index);
-		return ResponseEntity.ok("Everything is okay!");
+		return "redirect:/";
 	}
 }
