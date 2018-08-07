@@ -1,0 +1,116 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Spring Boot Thymeleaf Hello World Example</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <link rel="stylesheet" type="text/css"
+          href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"
+          href="../assets/css/main.css" />
+
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Spring Boot</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+
+    <div class="starter-template">
+        <h1>Spring Boot Web Thymeleaf Example</h1>
+        <h2>
+            <span th:text="'Message: ' + ${message}"></span>
+        </h2>
+    </div>
+
+
+
+    <label for="description">Description</label>
+    <input id="description" value="description">
+    <label for="priority">Priority</label>
+    <input id="priority" value="HIGH">
+
+    <button onclick="addEntry()">Add Entry</button>
+
+
+    <button onclick="getAllEntries()">Get all Entries</button>
+    <button onclick="getAllEntriesForToday()">Get all Entries for Today</button>
+
+    <div id="entries"></div>
+
+
+
+
+
+</div>
+<!-- /.container -->
+
+<script type="text/javascript" src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+    'use strict';
+
+    function addEntry() {
+
+        var description = document.getElementById("description").value;
+        var priority = document.getElementById("priority").value;
+
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if(this.readyState === 4 && this.status === 200) {
+                alert(this.responseText);
+            }
+        };
+        // xhttp.open("POST", "http://localhost:8080/api/addEntry", true);
+        xhttp.open("POST", "http://todo-app-todoapp.193b.starter-ca-central-1.openshiftapps.com/api/addEntry", true);
+        xhttp.setRequestHeader("Content-type", "application/json");
+        xhttp.send("{\"priority\":\"" + priority + "\",\"description\":\""+description+"\"}");
+
+    }
+
+    function getAllEntries() {
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if(this.readyState === 4 && this.status === 200) {
+                document.getElementById("entries").innerText = this.responseText;
+            }
+        };
+        // xhttp.open("GET", "http://localhost:8080/api/getAllEntries", true);
+        xhttp.open("GET", "http://todo-app-todoapp.193b.starter-ca-central-1.openshiftapps.com/api/getAllEntries", true);
+        xhttp.setRequestHeader("Content-type", "application/json");
+        xhttp.send();
+
+    }
+
+    function getAllEntriesForToday() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if(this.readyState === 4 && this.status === 200) {
+                document.getElementById("entries").innerText = this.responseText;
+            }
+        };
+        xhttp.open("GET", "http://todo-app-todoapp.193b.starter-ca-central-1.openshiftapps.com/api/getAllEntriesForToday", true);
+        // xhttp.open("GET", "http://localhost:8080/api/getAllEntriesForToday", true);
+        xhttp.setRequestHeader("Content-type", "application/json");
+        xhttp.send();
+    }
+
+
+</script>
+
+</body>
+</html>
