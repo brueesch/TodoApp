@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
@@ -24,8 +23,8 @@ public class EntryController {
 		this.entryService = entryService;
 	}
 
-	@RequestMapping(value = "/addEntry", method = RequestMethod.GET)
-	public ResponseEntity<String> addEntry(Entry entry) {
+	@RequestMapping(value = "/addEntry", method = RequestMethod.POST)
+	public ResponseEntity<String> addEntry(@RequestBody Entry entry) {
 		if (entry.getDate() == null) {
 			entry.setDate(LocalDate.now());
 		}
