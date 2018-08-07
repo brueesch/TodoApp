@@ -4,16 +4,23 @@
     <title>Spring Boot Thymeleaf Hello World Example</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
+    <script src="webjars/jquery/1.11.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css"
           href="webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
 
 </head>
 <body>
 
+
 <nav class="navbar navbar-inverse">
     <div class="container">
         <div class="navbar-header">
             <a class="navbar-brand" href="#">BrüeschTasks - Open Shift / Spring Boot / Thymeleaf / Swagger Example</a>
+        </div>
+        <div class="navbar-form text-right">
+            <form th:action="@{/logout}" method="post">
+                <button class="btn btn-primary" type="submit">Logout</button>
+            </form>
         </div>
     </div>
 </nav>
