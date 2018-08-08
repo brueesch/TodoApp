@@ -40,18 +40,12 @@ public class EntryControllerTest {
 	}
 
 	@Test
-	public void getAllEntriesForTodayTest() {
-		ResponseEntity<ArrayList<Entry>> entries = entryController.getAllEntriesForToday();
-		assertNotNull(entries.getBody());
-	}
-
-	@Test
 	public void snoozeEntryTest() {
 		Entry entry = new Entry().setDescription("Test Entry").setPriority(Priority.HIGH).setDate(LocalDate.now().plusDays(5));
 		entryController.addEntry(entry);
 		SnoozeEntryType snoozeEntryType = new SnoozeEntryType().setDate(LocalDate.now().plusDays(4)).setIndex(0);
-		ResponseEntity<String> result = entryController.snoozeEntry(snoozeEntryType);
-		assertEquals(ResponseEntity.ok("Everything is okay!"), result);
+		String result = entryController.snoozeEntry(0, LocalDate.now());
+		assertEquals("redirect:/", result);
 	}
 
 

@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
@@ -37,15 +38,10 @@ public class EntryController {
 		return ResponseEntity.ok(entryService.getAllEntries());
 	}
 
-	@RequestMapping(value = "/getAllEntriesForToday", method = RequestMethod.GET)
-	public ResponseEntity<ArrayList<Entry>> getAllEntriesForToday() {
-		return ResponseEntity.ok(entryService.getAllEntriesForToday());
-	}
-
 	@RequestMapping(value = "/snoozeEntry", method = RequestMethod.POST)
-	public ResponseEntity<String> snoozeEntry(@RequestBody SnoozeEntryType snoozeEntryType) {
-		entryService.setNewDate(snoozeEntryType.getIndex(), snoozeEntryType.getDate());
-		return ResponseEntity.ok("Everything is okay!");
+	public String snoozeEntry(@RequestParam("index") int index, @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+		entryService.setNewDate(index, date);
+		return "redirect:/";
 	}
 
 	@RequestMapping(value = "/removeEntry", method = RequestMethod.POST)
