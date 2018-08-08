@@ -2,6 +2,8 @@ package ch.brueesch.todoapp.todoapp.model;
 
 import java.time.LocalDate;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import ch.brueesch.todoapp.todoapp.util.Priority;
 
@@ -9,6 +11,8 @@ public class Entry {
 
 	private String description;
 	private Priority priority;
+
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 	private LocalDate date;
 
 	public String getDescription() {

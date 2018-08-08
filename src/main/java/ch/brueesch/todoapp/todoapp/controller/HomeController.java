@@ -23,6 +23,7 @@ public class HomeController {
 	@RequestMapping("/")
 	public String welcome(Model model, Map<String, Object> model2) {
 		model2.put("messages", entryService.getAllEntries());
+		model2.put("todaystasks", entryService.getAllEntriesForToday());
 
 		Entry entry = new Entry();
 		model.addAttribute(entry);
