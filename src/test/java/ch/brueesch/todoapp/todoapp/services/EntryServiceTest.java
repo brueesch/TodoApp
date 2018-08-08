@@ -38,24 +38,6 @@ public class EntryServiceTest {
 	}
 
 	@Test
-	public void getAllEntriesForTodayTest() {
-		EntryService entryService = new EntryService();
-		entryService.addEntry(new Entry().setDescription("Test").setPriority(Priority.HIGH).setDate(LocalDate.now()));
-		entryService.addEntry(new Entry().setDescription("Test").setPriority(Priority.HIGH).setDate(LocalDate.now().plusDays(2)));
-		entryService.addEntry(new Entry().setDescription("Test").setPriority(Priority.HIGH).setDate(LocalDate.now().minusDays(2)));
-
-		ArrayList<Entry> entries = entryService.getAllEntriesForToday();
-
-		assertEquals(2, entries.size());
-		assertEquals(LocalDate.now(), entries.get(0).getDate());
-		assertEquals(LocalDate.now().minusDays(2), entries.get(1).getDate());
-
-		entries = entryService.getAllEntries();
-		assertEquals(3, entries.size());
-
-	}
-
-	@Test
 	public void setNewDateTest() {
 		EntryService entryService = new EntryService();
 		entryService.addEntry(new Entry().setDescription("Test").setPriority(Priority.HIGH).setDate(LocalDate.now()));

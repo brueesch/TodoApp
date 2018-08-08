@@ -20,13 +20,8 @@ public class EntryService {
 
 	public ArrayList<Entry> getAllEntries() {
 		entries.sort(Comparator.comparing(Entry::getPriority));
+		entries.sort(Comparator.comparing(Entry::getDate));
 		return entries;
-	}
-
-	public ArrayList<Entry> getAllEntriesForToday() {
-		return entries.stream()
-				.filter(Entry::isTodayOrBefore)
-				.collect(Collectors.toCollection(ArrayList::new));
 	}
 
 	public void setNewDate(int index, LocalDate date) {
